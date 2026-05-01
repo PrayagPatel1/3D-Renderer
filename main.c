@@ -7,11 +7,14 @@ int WINAPI WinMain(HINSTANCE hInstance,
                    LPSTR lpCmdLine,
                    int nCmdShow)
 {
+    (void)hPrevInstance;
+    (void)lpCmdLine;
+
     // === Define a Window Class ===
-    const wchar_t CLASS_NAME[] = L"Renderer Window";
+    const char CLASS_NAME[] = "Renderer Window";
 
     WNDCLASS wc = {};
-    wc.lpfnWndProc = NULL;
+    wc.lpfnWndProc = DefWindowProc;
     wc.hInstance = hInstance;
     wc.lpszClassName = CLASS_NAME;
 
@@ -20,7 +23,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     // === Window Creation ===
     HWND window_handle = CreateWindowEx(0,
                                         CLASS_NAME,
-                                        L"3D Renderer",
+                                        "3D Renderer",
                                         WS_OVERLAPPEDWINDOW,
                                         CW_USEDEFAULT,
                                         CW_USEDEFAULT,
