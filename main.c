@@ -2,6 +2,19 @@
 
 #include <windows.h>
 
+// === Window Procedure Function ===
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    switch (uMsg)
+    {
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        return 0;
+    }
+
+    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
 int WINAPI WinMain(HINSTANCE hInstance,
                    HINSTANCE hPrevInstance,
                    LPSTR lpCmdLine,
@@ -14,7 +27,7 @@ int WINAPI WinMain(HINSTANCE hInstance,
     const char CLASS_NAME[] = "Renderer Window";
 
     WNDCLASS wc = {};
-    wc.lpfnWndProc = DefWindowProc;
+    wc.lpfnWndProc = WindowProc;
     wc.hInstance = hInstance;
     wc.lpszClassName = CLASS_NAME;
 
@@ -41,6 +54,14 @@ int WINAPI WinMain(HINSTANCE hInstance,
     }
 
     ShowWindow(window_handle, nCmdShow);
+
+    // === Message Loop ===
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0) > 0)
+    {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
 
     return 0;
 }
