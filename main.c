@@ -1,6 +1,26 @@
 #include <stdio.h>
-
 #include <windows.h>
+#include <d3d11.h>
+
+// === Global variables for Direct3D 11 ===
+
+// === Initialize the Direct3D 11 API ===
+int InitD3D11()
+{
+    return 0;
+}
+
+// === Render ===
+int Render()
+{
+    return 0;
+}
+
+// === Cleanup Direct3d 11 interfaces / objects / resources ===
+int Cleanup()
+{
+    return 0;
+}
 
 // === Window Procedure Function ===
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
