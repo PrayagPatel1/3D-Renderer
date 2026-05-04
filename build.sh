@@ -3,12 +3,28 @@
 SOURCE_FILE="main.c"
 OUTPUT_EXE="3d-renderer"
 
-gcc -Wall -Wextra "$SOURCE_FILE" -o "$OUTPUT_EXE" -lgdi32 -luser32 -ld3d11 -ldxgi -luuid
+build(){
+    echo "Comipling..."
+    gcc -Wall -Wextra "$SOURCE_FILE" -o "$OUTPUT_EXE" -lgdi32 -luser32 -ld3d11 -ldxgi -luuid
+}
 
-if [ $? -eq 0 ]; then
-    echo "Build Successful. Running $OUTPUT_EXE..."
-    ./"$OUTPUT_EXE"
-else
-    echo "Build Failed."
-    exit 1
-fi 
+clean(){
+    echo "Cleaning up build artifacts ..."
+    rm -rf "$OUTPUT_EXE" *.o
+}
+
+if [[ $# -gt 0 ]]; then
+    case "$1" in
+        clean)
+            clean
+            exit 0
+            ;;
+        *)
+            echo "Usage: $0 [clean]"
+            exit 1
+            ;;
+    esac
+fi
+
+build
+echo "Build successful: ./$OUTPUT_EXE"
